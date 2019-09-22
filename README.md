@@ -36,6 +36,12 @@ mypy-extensions==0.4.1
 codecov==2.0.15
 ```
 
+## To deploy
+
+[ryuichi1208/py-dep-kun](https://cloud.docker.com/repository/registry-1.docker.io/ryuichi1208/py-dep-kun)
+
+Deploy to above with push with tag as a trigger.
+
 ## Author
 
 [ryuichi1208](https://github.com/ryuichi1208)
