@@ -39,6 +39,20 @@ class TestNumpyCals:
         assert n.calc_cos(9.0) == 0.5403023058681398
         assert n.calc_cos(10.0) == 0.5403023058681398
 
+    def test_calc_tan(self):
+        n = run.NumpyCalc()
+        assert n.calc_tan(0.0) == 0.0
+        assert n.calc_tan(1.0) == 1.557407724654902
+        assert n.calc_tan(2.0) == 1.557407724654902
+        assert n.calc_tan(3.0) == 1.557407724654902
+        assert n.calc_tan(4.0) == 1.557407724654902
+        assert n.calc_tan(5.0) == 1.557407724654902
+        assert n.calc_tan(6.0) == 1.557407724654902
+        assert n.calc_tan(7.0) == 1.557407724654902
+        assert n.calc_tan(8.0) == 1.557407724654902
+        assert n.calc_tan(9.0) == 1.557407724654902
+        assert n.calc_tan(10.0) == 1.557407724654902
+
     def test_calc_arc_sin(self):
         n = run.NumpyCalc()
         assert n.calc_arc_sin(0.0) == 0.0
@@ -72,6 +86,10 @@ class TestNumpyCals:
         assert run.NumpyCalc.sum_rated_for(100000) == 5000050000
         assert run.NumpyCalc.sum_rated_for(1000000) == 500000500000
 
+    def test_calc_nepia(self):
+        n = run.NumpyCalc()
+        assert n.calc_nepia() == 2.718281828459045
+
     def test_ret_yield(self):
         N = run.NumpyCalc.ret_yield(5)
         assert next(N) == 0
@@ -82,3 +100,20 @@ class TestNumpyCals:
 
         with pytest.raises(StopIteration) as e_info:
             next(N)
+
+class TestDecoFuncCls:
+    def test_triangle_methods(self):
+        n = run.DecoFuncCls(1, 2, 3)
+        assert n.triangle_methods() == 6
+
+    def test_exec_git_api(self):
+        url = {
+            "https://api.github.com": 200,
+            "https://qiita.com/api/v2/users": 200,
+            "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/": 200,
+            "https://api.gnavi.co.jp/RestSearchAPI/v3/": 401
+        }
+        for k, v in url.items():
+            assert run.DecoFuncCls.exec_git_api(k) == v
+
+

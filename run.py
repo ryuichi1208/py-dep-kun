@@ -4,6 +4,7 @@
 import numpy
 import os
 import sys
+import requests
 from typing import Generator
 
 
@@ -30,6 +31,10 @@ class NumpyCalc(object):
         rad = rad if rad < 1 else 1
         return numpy.cos(rad)
 
+    def calc_tan(self, rad: int) -> float:
+        rad = rad if rad < 1 else 1
+        return numpy.tan(rad)
+
     def calc_arc_sin(self, rad: int) -> float:
         rad = rad if rad < 1 else 1
         return numpy.arcsin(rad)
@@ -51,6 +56,12 @@ class NumpyCalc(object):
     def calc_sqrt(self, num: int) -> float:
         return numpy.sqrt(num)
 
+    def calc_abs(self, num: int) -> float:
+        return numpy.abs(num)
+
+    def calc_nepia(self) -> float:
+        return numpy.e
+
     @classmethod
     def calc_power_cls(cls, num: int, que: int) -> float:
         if que < 1:
@@ -67,3 +78,27 @@ class NumpyCalc(object):
     def ret_yield(num: int) -> Generator:
         for i in range(num):
             yield i
+
+class DecoFuncCls(object):
+    def __init__(self, x, y, z=1):
+        self.__x = x
+        self.__y = y
+        self.__z = z
+
+    def triangle_methods(self):
+        return self.__x * self.__y * self.__z
+
+    @classmethod
+    def cat_string(cls, cat_list: list):
+        ans = ""
+        for cat in cat_list:
+            if isinstance(cat, str):
+                ans += cat
+            else:
+                continue
+        return ans
+
+    @staticmethod
+    def exec_git_api(url: str) -> int:
+        r = requests.get(url)
+        return r.status_code
