@@ -3,6 +3,7 @@ py-dep-kun
 test-report
 .pytest_cache
 .DS_store
+.mypy_cache
 
 # Editor files
 .vim
