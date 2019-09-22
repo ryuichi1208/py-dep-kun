@@ -42,16 +42,16 @@ class TestNumpyCals:
     def test_calc_tan(self):
         n = run.NumpyCalc()
         assert n.calc_tan(0.0) == 0.0
-        assert n.calc_tan(1.0) == 1.557407724654902
-        assert n.calc_tan(2.0) == 1.557407724654902
-        assert n.calc_tan(3.0) == 1.557407724654902
-        assert n.calc_tan(4.0) == 1.557407724654902
-        assert n.calc_tan(5.0) == 1.557407724654902
-        assert n.calc_tan(6.0) == 1.557407724654902
-        assert n.calc_tan(7.0) == 1.557407724654902
-        assert n.calc_tan(8.0) == 1.557407724654902
-        assert n.calc_tan(9.0) == 1.557407724654902
-        assert n.calc_tan(10.0) == 1.557407724654902
+        assert n.calc_tan(1.0) == 1.5574077246549023
+        assert n.calc_tan(2.0) == 1.5574077246549023
+        assert n.calc_tan(3.0) == 1.5574077246549023
+        assert n.calc_tan(4.0) == 1.5574077246549023
+        assert n.calc_tan(5.0) == 1.5574077246549023
+        assert n.calc_tan(6.0) == 1.5574077246549023
+        assert n.calc_tan(7.0) == 1.5574077246549023
+        assert n.calc_tan(8.0) == 1.5574077246549023
+        assert n.calc_tan(9.0) == 1.5574077246549023
+        assert n.calc_tan(10.0) == 1.5574077246549023
 
     def test_calc_arc_sin(self):
         n = run.NumpyCalc()
