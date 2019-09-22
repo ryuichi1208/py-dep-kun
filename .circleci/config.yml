@@ -16,13 +16,13 @@ jobs:
           name: Print info
           when: always
           command: |
-            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V
+            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V && id
       - run:
           name: Init enviroment
           when: always
           command: |
-            pip install -U pip
-            pip install -r requirements.txt
+            sudo pip install -U pip
+            sudo pip install -r requirements.txt
       - run:
           name: Run black
           when: always
