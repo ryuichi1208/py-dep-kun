@@ -12,7 +12,11 @@ jobs:
       name: py-executor
     steps:
       - checkout
-      - run: pwd && ls -lR
+      - run:
+          name: Print info
+          when: always
+          command: |
+            ls -lRt && pwd && uname -a && git tag --list
 
 workflows:
   version: 2
