@@ -47,6 +47,16 @@ jobs:
           command: |
             pytest --version
             pytest -v
+      - run:
+          name: Output coverage report
+          when: always
+          command: |
+            pytest --cov .
+            pytest --cov . --cov-report html
+      - store_test_results:
+          path: htmlcov
+      - store_artifacts:
+          path: htmlcov
 
 workflows:
   version: 2

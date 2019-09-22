@@ -4,6 +4,7 @@ test-report
 .pytest_cache
 .DS_store
 .mypy_cache
+htmlcov
 
 # Editor files
 .vim
