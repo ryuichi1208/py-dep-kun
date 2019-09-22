@@ -7,6 +7,7 @@ import pytest
 import os
 import sys
 
+
 class TestNumpyCals:
     def test_calc_sin(self):
         n = run.NumpyCalc()

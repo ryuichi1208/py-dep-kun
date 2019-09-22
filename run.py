@@ -4,6 +4,7 @@
 import numpy
 import os
 import sys
+from typing import Generator
 
 
 def debug(p):
@@ -63,6 +64,6 @@ class NumpyCalc(object):
         return sum([i for i in range(num + 1)])
 
     @staticmethod
-    def ret_yield(num: int) -> int:
+    def ret_yield(num: int) -> Generator:
         for i in range(num):
             yield i

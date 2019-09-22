@@ -7,7 +7,7 @@ executors:
       - image: circleci/python:3.7.3
 
 jobs:
-  build:
+  lint_and_test:
     executor:
       name: py-executor
     steps:
@@ -27,6 +27,7 @@ jobs:
           name: Run black
           when: always
           command: |
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --check
             find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --diff
             find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black ; echo $?
       - run:
@@ -34,18 +35,29 @@ jobs:
           when: always
           command: |
             find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 pycodestyle ; echo $?
-
+      - run:
+          name: Run type check
+          when: always
+          command: |
+            mypy -V
+            mypy run.py
+      - run:
+          name: Run tests
+          when: always
+          command: |
+            pytest --version
+            pytest -v
 
 workflows:
   version: 2
   # Execute all branch flows
   build_and_test:
     jobs:
-      - build
+      - lint_and_test
   # Flow to be executed only when pushing with tag
   tagged-build:
     jobs:
-      - build:
+      - lint_and_test:
           filters:
             tags:
               only: /^v.*/
