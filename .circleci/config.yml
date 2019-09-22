@@ -76,17 +76,16 @@ jobs:
 
 workflows:
   version: 2
-  # Execute all branch flows
   build_and_test:
     jobs:
-      - lint_and_test
-  # Flow to be executed only when pushing with tag
-  tagged-build:
-    jobs:
+      # Flow to be executed only when pushing with tag
       - lint_and_test:
           filters:
-            tags:
-              only: /^v.*/
-  container_build:
-    jobs:
-      - build
+            branches:
+              only:
+                - master
+                - beta
+                - alpha
+      - build:
+          requires:
+            - lint_and_test
