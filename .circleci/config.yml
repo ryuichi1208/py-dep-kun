@@ -27,14 +27,14 @@ jobs:
           name: Run black
           when: always
           command: |
-            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --check
-            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --diff
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --check && echo 0
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --diff && echo 0
             find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black ; echo $?
       - run:
           name: Run formerly
           when: always
           command: |
-            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 pycodestyle ; echo $?
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 pycodestyle ; echo $? && echo 0
       - run:
           name: Run type check
           when: always
