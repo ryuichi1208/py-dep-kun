@@ -94,6 +94,8 @@ workflows:
                 - master
                 - beta
                 - alpha
+            tags:
+              only: /v.*/
       - build:
           requires:
             - lint_and_test
