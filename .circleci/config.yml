@@ -1,0 +1,28 @@
+version: 2.1
+
+executors:
+  py-executor:
+    docker:
+      - image: circleci/python:3.7.3
+    working_directory: /app
+
+jobs:
+  build:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: pwd && ls -lR
+
+workflows:
+  version: 2
+  # Execute all branch flows
+  build_and_test:
+    jobs:
+      - build
+  # Flow to be executed only when pushing with tag
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/

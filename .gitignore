@@ -1,0 +1,17 @@
+# Build artifacts
+py-dep-kun
+test-report
+.pytest_cache
+.DS_store
+
+# Editor files
+.vim
+.idea/
+.project
+.pydevproject
+
+# Temporary and user configuration files
+*~
+*.orig
+*.rej
+*.swp
