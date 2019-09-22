@@ -56,16 +56,16 @@ class TestNumpyCals:
     def test_calc_arc_sin(self):
         n = run.NumpyCalc()
         assert n.calc_arc_sin(0.0) == 0.0
-        assert n.calc_arc_sin(1.0) == 1.5707963267948966
-        assert n.calc_arc_sin(2.0) == 1.5707963267948966
-        assert n.calc_arc_sin(3.0) == 1.5707963267948966
-        assert n.calc_arc_sin(4.0) == 1.5707963267948966
-        assert n.calc_arc_sin(5.0) == 1.5707963267948966
-        assert n.calc_arc_sin(6.0) == 1.5707963267948966
-        assert n.calc_arc_sin(7.0) == 1.5707963267948966
-        assert n.calc_arc_sin(8.0) == 1.5707963267948966
-        assert n.calc_arc_sin(9.0) == 1.5707963267948966
-        assert n.calc_arc_sin(10.0) == 1.5707963267948966
+        assert n.calc_arc_sin(1.0) == 1.5574077246549023
+        assert n.calc_arc_sin(2.0) == 1.5574077246549023
+        assert n.calc_arc_sin(3.0) == 1.5574077246549023
+        assert n.calc_arc_sin(4.0) == 1.5574077246549023
+        assert n.calc_arc_sin(5.0) == 1.5574077246549023
+        assert n.calc_arc_sin(6.0) == 1.5574077246549023
+        assert n.calc_arc_sin(7.0) == 1.5574077246549023
+        assert n.calc_arc_sin(8.0) == 1.5574077246549023
+        assert n.calc_arc_sin(9.0) == 1.5574077246549023
+        assert n.calc_arc_sin(10.0) == 1.5574077246549023
 
     def test_calc_power(self):
         assert run.NumpyCalc.calc_power_cls(1, 2) == 1
