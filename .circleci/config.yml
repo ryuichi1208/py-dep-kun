@@ -81,6 +81,18 @@ jobs:
           when: always
           command: |
             docker version && docker-compose version
+      - run:
+          name: Build container
+          when: always
+          command: |
+            docker image build -t py-dep-kun .
+            docker image ls
+      - run:
+          name: Add container tag
+          when: always
+          command: |
+            docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
+            docker tag py-dep-kun ${DOCKERHUB_USER}/${DOCKERHUB_REPOS}:${CIRCLE_TAG}
 
 workflows:
   version: 2
