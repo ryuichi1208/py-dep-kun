@@ -71,7 +71,7 @@ jobs:
           command: |
             codecov
 
-  build:
+  build_and_deploy:
     executor:
       name: py-builder
     steps:
@@ -93,12 +93,13 @@ jobs:
           command: |
             docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASS}
             docker tag py-dep-kun ${DOCKERHUB_USER}/${DOCKERHUB_REPOS}:${CIRCLE_TAG}
+            docker image ls
+            docker image push ${DOCKERHUB_USER}/${DOCKERHUB_REPOS}:${CIRCLE_TAG}
 
 workflows:
   version: 2
-  build_and_test:
+  defaultWorkflow:
     jobs:
-      # Flow to be executed only when pushing with tag
       - lint_and_test:
           filters:
             branches:
@@ -108,7 +109,8 @@ workflows:
                 - alpha
             tags:
               only: /v.*/
-      - build:
+      # Flow to be executed only when pushing with tag
+      - build_and_deploy:
           requires:
             - lint_and_test
           filters:
