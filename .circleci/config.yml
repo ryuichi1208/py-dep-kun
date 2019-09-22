@@ -5,6 +5,11 @@ executors:
     # working_directory: /tmp
     docker:
       - image: circleci/python:3.7.3
+  py-builder:
+    machine:
+      enabled: true
+      image: circleci/classic:201808-01
+      docker_layer_caching: true
 
 jobs:
   lint_and_test:
@@ -58,6 +63,17 @@ jobs:
       - store_artifacts:
           path: htmlcov
 
+  build:
+    executor:
+      name: py-builder
+    steps:
+      - checkout
+      - run:
+          name: Print info
+          when: always
+          command: |
+            docker version && docker-compose version
+
 workflows:
   version: 2
   # Execute all branch flows
@@ -71,3 +87,6 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+  container_build:
+    jobs:
+      - build
