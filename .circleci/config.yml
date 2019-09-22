@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   py-executor:
-    working_directory: /tmp
+    # working_directory: /tmp
     docker:
       - image: circleci/python:3.7.3
 
