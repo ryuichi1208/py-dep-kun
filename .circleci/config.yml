@@ -16,7 +16,25 @@ jobs:
           name: Print info
           when: always
           command: |
-            ls -lRt && pwd && uname -a && git tag --list
+            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V
+      - run:
+          name: Init enviroment
+          when: always
+          command: |
+            pip install -U pip
+            pip install -r requirements.txt
+      - run:
+          name: Run black
+          when: always
+          command: |
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black --diff
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 black ; echo $?
+      - run:
+          name: Run formerly
+          when: always
+          command: |
+            find . -type f -name "*.py" | grep -v "py-dep-kun" | xargs -L 1 pycodestyle ; echo $?
+
 
 workflows:
   version: 2

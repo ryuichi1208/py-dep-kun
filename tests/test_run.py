@@ -79,4 +79,3 @@ class TestNumpyCals:
 
         with pytest.raises(StopIteration) as e_info:
             next(N)
-

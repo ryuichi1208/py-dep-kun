@@ -5,15 +5,16 @@ import numpy
 import os
 import sys
 
+
 def debug(p):
-    print('before:')
+    print("before:")
     print(p.before)
-    print('--')
-    print('after:')
+    print("--")
+    print("after:")
     print(p.after)
-    print('--')
+    print("--")
     print(p.match.groups())
-    print('--')
+    print("--")
 
 
 class NumpyCalc(object):
@@ -53,7 +54,7 @@ class NumpyCalc(object):
     def calc_power_cls(cls, num: int, que: int) -> float:
         if que < 1:
             return 0
-        return num**que
+        return num ** que
 
     @staticmethod
     def sum_rated_for(num: int) -> int:
