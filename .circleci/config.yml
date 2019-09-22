@@ -97,3 +97,6 @@ workflows:
       - build:
           requires:
             - lint_and_test
+          filters:
+            tags:
+              only: /v.*/
