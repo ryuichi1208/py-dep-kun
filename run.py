@@ -110,7 +110,7 @@ class NumpyCalc(object):
         """
         return numpy.pi
 
-    def calc_accumulate(self, accum: list) -> list:
+    def calc_accumulate(self, accum: list) -> tuple:
         tmp = list(accumulate(accum))
         return tmp, sum(tmp)
 
@@ -162,7 +162,7 @@ class DecoFuncCls(object):
         return r.status_code
 
     # @functools.lru_cache(maxsize=None)
-    def collective_re(self, L1: set, L2: set) -> set:
+    def collective_re(self, L1: set, L2: set) -> tuple:
         return L1 | L2, L1 & L2
 
 
