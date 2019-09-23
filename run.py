@@ -5,7 +5,12 @@ import numpy
 import os
 import sys
 import requests
+import functools
+
+from itertools import accumulate
 from typing import Generator
+from multiprocessing import Pool
+from functools import lru_cache
 
 
 def debug(p):
@@ -20,47 +25,94 @@ def debug(p):
 
 
 class NumpyCalc(object):
+    """
+    A class to extend the numpy cli for utilities.
+    """
+
     def __init__(self):
         pass
 
     def calc_sin(self, rad: int) -> float:
+        """
+        Calculation function of sin function
+        """
         rad = rad if rad < 1 else 1
         return numpy.sin(rad)
 
     def calc_cos(self, rad: int) -> float:
+        """
+        Calculation function of cos function
+        """
         rad = rad if rad < 1 else 1
         return numpy.cos(rad)
 
     def calc_tan(self, rad: int) -> float:
+        """
+        Calculation function of tan function
+        """
         rad = rad if rad < 1 else 1
         return numpy.tan(rad)
 
     def calc_arc_sin(self, rad: int) -> float:
+        """
+        Calculation function of arc_sin function
+        """
         rad = rad if rad < 1 else 1
         return numpy.arcsin(rad)
 
     def calc_arc_cos(self, rad: int) -> float:
+        """
+        Calculation function of arc_cos function
+        """
         rad = rad if rad < 1 else 1
         return numpy.arccos(rad)
 
     def calc_radians(self, rad: int) -> float:
+        """
+        Calculation function of radians function
+        """
         rad = rad if rad < 1 else 1
         return numpy.radians(rad)
 
     def calc_exp(self, num: int) -> float:
+        """
+        Calculation function of exp function
+        """
         return numpy.exp(num)
 
     def calc_log(self, num: int) -> float:
+        """
+        Calculation function of log function
+        """
         return numpy.log(num)
 
     def calc_sqrt(self, num: int) -> float:
+        """
+        Calculation function of sqrt function
+        """
         return numpy.sqrt(num)
 
     def calc_abs(self, num: int) -> float:
+        """
+        Calculation function of abs function
+        """
         return numpy.abs(num)
 
     def calc_nepia(self) -> float:
+        """
+        Calculation function of nepia function
+        """
         return numpy.e
+
+    def calc_pi(self) -> float:
+        """
+        Calculation function of pi function
+        """
+        return numpy.pi
+
+    def calc_accumulate(self, accum: list) -> list:
+        tmp = list(accumulate(accum))
+        return tmp, sum(tmp)
 
     @classmethod
     def calc_power_cls(cls, num: int, que: int) -> float:
@@ -78,6 +130,11 @@ class NumpyCalc(object):
     def ret_yield(num: int) -> Generator:
         for i in range(num):
             yield i
+
+    @staticmethod
+    def map_reduce(ls: list):
+        return list(map(lambda x: x * x, ls))
+
 
 class DecoFuncCls(object):
     def __init__(self, x, y, z=1):
@@ -99,6 +156,47 @@ class DecoFuncCls(object):
         return ans
 
     @staticmethod
+    @functools.lru_cache(maxsize=None)
     def exec_git_api(url: str) -> int:
         r = requests.get(url)
         return r.status_code
+
+    # @functools.lru_cache(maxsize=None)
+    def collective_re(self, L1: set, L2: set) -> set:
+        return L1 | L2, L1 & L2
+
+
+class MultiProcTools(object):
+    """
+    A class that supports multi-process execution in python
+    """
+    @staticmethod
+    def multi_proc_function(x: int):
+        proc_list = [i for i in range(x) if i % 2 == 0]
+        return sum(list(map(lambda x: x * 2, proc_list)))
+
+    def calc_reduce(self, x: int) -> int:
+        return self.multi_proc_function(x)
+
+class OverrideMethods(object):
+    """
+    A class that overrides the basic special methods of python
+    """
+    def __init__(self, name: str, version: int, function: str):
+        self.__package = name
+        self.__version = version
+        self.__functions = function
+
+    def __str__(self) -> str:
+        return f"{self.__package}:{self.__version}-{self.__functions}"
+
+    def __cmp__(self, other):
+        if other is None:
+            return 1
+
+            #  Not a PackageObject(), so do this ourselves the bad way:
+            return (cmp(self.name, other.name) or
+                    cmp(self.arch, other.arch))
+
+    def getDiscNum(self):
+        return None

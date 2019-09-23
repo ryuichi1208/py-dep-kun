@@ -67,6 +67,15 @@ class TestNumpyCals:
         assert n.calc_arc_sin(9.0) == 1.5707963267948966
         assert n.calc_arc_sin(10.0) == 1.5707963267948966
 
+    def test_calc_accumulate(self):
+        n = run.NumpyCalc()
+        accum = [1, 2, 3, 4, 5]
+        assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
+        accum = [1, 2, 3, 4, 5]
+        assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
+        accum = [1, 2, 3, 4, 5]
+        assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
+
     def test_calc_power(self):
         assert run.NumpyCalc.calc_power_cls(1, 2) == 1
         assert run.NumpyCalc.calc_power_cls(2, 2) == 4
@@ -90,6 +99,10 @@ class TestNumpyCals:
         n = run.NumpyCalc()
         assert n.calc_nepia() == 2.718281828459045
 
+    def test_calc_pi(self):
+        n = run.NumpyCalc()
+        assert n.calc_pi() == 3.141592653589793
+
     def test_ret_yield(self):
         N = run.NumpyCalc.ret_yield(5)
         assert next(N) == 0
@@ -100,6 +113,10 @@ class TestNumpyCals:
 
         with pytest.raises(StopIteration) as e_info:
             next(N)
+
+    def test_map_reduce(self):
+        L = [1, 2, 3, 4, 10, 128, 1024, 4096]
+        assert run.NumpyCalc.map_reduce(L) == [1, 4, 9, 16, 100,16384, 1048576, 16777216]
 
 class TestDecoFuncCls:
     def test_triangle_methods(self):
@@ -116,4 +133,11 @@ class TestDecoFuncCls:
         for k, v in url.items():
             assert run.DecoFuncCls.exec_git_api(k) == v
 
-
+    def test_collective_re(self):
+        n = run.DecoFuncCls(1,2,3)
+        L1, L2 = {1,2,3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1,2,3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1,2,3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
