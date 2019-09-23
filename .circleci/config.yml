@@ -48,13 +48,14 @@ jobs:
           when: always
           command: |
             mypy -V
-            mypy run.py
+            mypy -v --no-warn-no-return run.py
       - run:
           name: Run tests
           when: always
           command: |
             pytest --version
-            pytest -v
+            pytest -v --show-capture=no --cache-clear --setup-show
+            pytest -v --show-capture=no --cache-clear --setup-show --randomly-seed=last
       - run:
           name: Output coverage report
           when: always

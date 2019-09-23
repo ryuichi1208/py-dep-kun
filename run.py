@@ -12,6 +12,13 @@ from typing import Generator
 from multiprocessing import Pool
 from functools import lru_cache
 
+# Package meta-data.
+NAME = "py-dep-kun"
+URL = "https://github.com/ryucihi1208/py-dep-kub"
+EMAIL = "ryucrosskey@gmail.com"
+AUTHOR = "ryucih1208"
+VERSION = "1.0.0"
+
 
 def debug(p):
     print("before:")
@@ -170,6 +177,7 @@ class MultiProcTools(object):
     """
     A class that supports multi-process execution in python
     """
+
     @staticmethod
     def multi_proc_function(x: int):
         proc_list = [i for i in range(x) if i % 2 == 0]
@@ -181,12 +189,15 @@ class MultiProcTools(object):
     def gen_circle_area_func(self, pi):
         def circle_area(radius):
             return pi * radius ** 2
+
         return circle_area
+
 
 class OverrideMethods(object):
     """
     A class that overrides the basic special methods of python
     """
+
     def __init__(self, name: str, version: int, function: str):
         self.__package = name
         self.__version = version
@@ -200,8 +211,11 @@ class OverrideMethods(object):
             return 1
 
             #  Not a PackageObject(), so do this ourselves the bad way:
-            return (cmp(self.name, other.name) or
-                    cmp(self.arch, other.arch))
+            return cmp(self.name, other.name) or cmp(self.arch, other.arch)
 
     def getDiscNum(self):
         return None
+
+
+if __name__ == "__main__":
+    pass

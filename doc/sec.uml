@@ -1,0 +1,22 @@
+@startuml
+
+actor User
+participant "LINE-BOT-server" as A
+participant "vim-deploy-api-server" as B
+participant "GitHub/vim" as C
+participant "GitHub/vim-dep-kun" as D
+participant "CircleCI" as E
+participant "DockerHub" as F
+User -> A: ビルド指示\nメッセージ送信
+A -> B: build request
+B -> C: 最新タグを取得
+C -> B
+B -> B: 自前コンテナと\nvimリポジトリのタグを比較
+B -> D: 最新タグをつけてpush
+D -> D: CI(?) / GitHub Actions
+D -> E: タグ付きpushを通知
+E -> C: 最新のソース取得
+E -> E: docker image build
+E -> F: docker image push
+
+@enduml
