@@ -35,3 +35,8 @@ class TestDecoFuncCls:
         n = run.OverrideMethods("variable", 6.0, "methods")
         n = run.OverrideMethods("variable", 7.0, "methods")
         n = run.OverrideMethods("variable", 8.0, "methods")
+
+    def test_gen_circle_area_func(self):
+        n = run.MultiProcTools()
+        out = n.gen_circle_area_func(3.14)
+        assert out(2) == 6.28

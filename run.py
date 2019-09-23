@@ -178,6 +178,11 @@ class MultiProcTools(object):
     def calc_reduce(self, x: int) -> int:
         return self.multi_proc_function(x)
 
+    def gen_circle_area_func(self, pi):
+        def circle_area(radius):
+            return pi * radius ** 2
+        return circle_area
+
 class OverrideMethods(object):
     """
     A class that overrides the basic special methods of python
