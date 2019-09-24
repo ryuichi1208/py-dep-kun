@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 
 import run
 import re
 import pytest
 import os
+
 
 class TestDecoFuncCls:
     def test_calc_reduce(self):

@@ -251,12 +251,15 @@ def auth_login(func, user_info: dict):
 
         return auth_not_func
 
+
 def h(a, b=0):
     print("aaa")
+
 
 @auth_login(h, {"admin": "admin"})
 def run():
     print("a")
+
 
 if __name__ == "__main__":
     pass

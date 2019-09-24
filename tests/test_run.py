@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 
 import run
 import re
@@ -106,13 +107,13 @@ class TestNumpyCals:
         assert len(n.calc_permutations(seq02, 3)) == 60
         seq03 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
         assert len(n.calc_permutations(seq03, len(seq03))) == 3628800
-        assert len(n.calc_permutations(seq03, len(seq03) -1 )) == 3628800
-        assert len(n.calc_permutations(seq03, len(seq03) -2 )) == 1814400
-        assert len(n.calc_permutations(seq03, len(seq03) -3 )) == 604800
-        assert len(n.calc_permutations(seq03, len(seq03) -4 )) == 151200
-        assert len(n.calc_permutations(seq03, len(seq03) -5 )) == 30240
-        assert len(n.calc_permutations(seq03, len(seq03) -6 )) == 5040
-        assert len(n.calc_permutations(seq03, len(seq03) -7 )) == 720
+        assert len(n.calc_permutations(seq03, len(seq03) - 1)) == 3628800
+        assert len(n.calc_permutations(seq03, len(seq03) - 2)) == 1814400
+        assert len(n.calc_permutations(seq03, len(seq03) - 3)) == 604800
+        assert len(n.calc_permutations(seq03, len(seq03) - 4)) == 151200
+        assert len(n.calc_permutations(seq03, len(seq03) - 5)) == 30240
+        assert len(n.calc_permutations(seq03, len(seq03) - 6)) == 5040
+        assert len(n.calc_permutations(seq03, len(seq03) - 7)) == 720
 
     def test_calc_combinations(self):
         n = run.NumpyCalc()
@@ -168,7 +169,17 @@ class TestNumpyCals:
 
     def test_map_reduce(self):
         L = [1, 2, 3, 4, 10, 128, 1024, 4096]
-        assert run.NumpyCalc.map_reduce(L) == [1, 4, 9, 16, 100,16384, 1048576, 16777216]
+        assert run.NumpyCalc.map_reduce(L) == [
+            1,
+            4,
+            9,
+            16,
+            100,
+            16384,
+            1048576,
+            16777216,
+        ]
+
 
 class TestDecoFuncCls:
     def test_triangle_methods(self):
@@ -180,16 +191,16 @@ class TestDecoFuncCls:
             "https://api.github.com": 200,
             "https://qiita.com/api/v2/users": 200,
             "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/": 200,
-            "https://api.gnavi.co.jp/RestSearchAPI/v3/": 401
+            "https://api.gnavi.co.jp/RestSearchAPI/v3/": 401,
         }
         for k, v in url.items():
             assert run.DecoFuncCls.exec_git_api(k) == v
 
     def test_collective_re(self):
-        n = run.DecoFuncCls(1,2,3)
-        L1, L2 = {1,2,3}, {3, 4, 5}
+        n = run.DecoFuncCls(1, 2, 3)
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
-        L1, L2 = {1,2,3}, {3, 4, 5}
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
-        L1, L2 = {1,2,3}, {3, 4, 5}
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
