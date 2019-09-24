@@ -229,6 +229,10 @@ class OverrideMethods(object):
 
 
 def auth_login(func, user_info: dict):
+    """
+    Function for performing login authentication.
+    If authentication is not performed, an error function is called.
+    """
     auth_list = {"admin": "admin", "test01": "password", "test02": "password"}
     try:
         for k in user_info.keys():
@@ -236,6 +240,9 @@ def auth_login(func, user_info: dict):
                 print("Authentication succeeded")
 
                 def auth_exec_func(*args, **kwags):
+                    """
+                    Path that is called when authentication is actually successful.
+                    """
                     func(*args, **kwags)
 
             else:
