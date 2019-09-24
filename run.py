@@ -228,27 +228,29 @@ class OverrideMethods(object):
         pass
 
 
-def auth_login(func, user_info: dict):
+def auth_login(auth_login_fun, user_info: dict):
     """
     Function for performing login authentication.
     If authentication is not performed, an error function is called.
     """
+    print("ccc")
     auth_list = {"admin": "admin", "test01": "password", "test02": "password"}
     try:
         for k in user_info.keys():
             if auth_list[k] == user_info[k]:
                 print("Authentication succeeded")
 
-                def auth_exec_func(*args, **kwags):
+                def func(*args, **kwags):
                     """
                     Path that is called when authentication is actually successful.
                     """
-                    func(*args, **kwags)
+                    print(auth_login_fun)
+                    auth_login_fun(*args, **kwags)
 
             else:
                 raise KeyError
 
-            return auth_exec_func
+            return auth_login_fun
     except KeyError:
         print("Certification failed")
 
@@ -258,15 +260,12 @@ def auth_login(func, user_info: dict):
 
         return auth_not_func
 
+def do_http_request_exeption(url: str = "localhost", port: int = 443):
+    print(url, port)
 
-def h(a, b=0):
-    print("aaa")
-
-
-@auth_login(h, {"admin": "admin"})
-def run():
-    print("a")
-
+@auth_login(do_http_request_exeption, {"admin": "admin"})
+def target_auth_login():
+    pass
 
 if __name__ == "__main__":
     pass
