@@ -67,6 +67,26 @@ class TestNumpyCals:
         assert n.calc_arc_sin(9.0) == 1.5707963267948966
         assert n.calc_arc_sin(10.0) == 1.5707963267948966
 
+    def test_calc_sqlt(self):
+        n = run.NumpyCalc()
+        assert n.calc_sqrt(1) == 1
+        assert n.calc_sqrt(4) == 2
+        assert n.calc_sqrt(9) == 3
+        assert n.calc_sqrt(16) == 4
+        assert n.calc_sqrt(36) == 6
+        assert n.calc_sqrt(49) == 7
+        assert n.calc_sqrt(64) == 8
+        assert n.calc_sqrt(81) == 9
+        assert n.calc_sqrt(100) == 10
+        assert n.calc_sqrt(121) == 11
+        assert n.calc_sqrt(144) == 12
+
+    def test_calc_abs(self):
+        n = run.NumpyCalc()
+        assert n.calc_abs(10) == 10
+        assert n.calc_abs(-10) == 10
+        assert n.calc_abs(0) == 0
+
     def test_calc_accumulate(self):
         n = run.NumpyCalc()
         accum = [1, 2, 3, 4, 5]
@@ -75,6 +95,38 @@ class TestNumpyCals:
         assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
         accum = [1, 2, 3, 4, 5]
         assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
+
+    def test_calc_permutations(self):
+        n = run.NumpyCalc()
+        seq01 = ["a", "b", "c"]
+        assert len(n.calc_permutations(seq01, len(seq01))) == 6
+        seq02 = ["a", "b", "c", "d", "e"]
+        assert len(n.calc_permutations(seq02, len(seq02))) == 120
+        assert len(n.calc_permutations(seq02, 2)) == 20
+        assert len(n.calc_permutations(seq02, 3)) == 60
+        seq03 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+        assert len(n.calc_permutations(seq03, len(seq03))) == 3628800
+        assert len(n.calc_permutations(seq03, len(seq03) -1 )) == 3628800
+        assert len(n.calc_permutations(seq03, len(seq03) -2 )) == 1814400
+        assert len(n.calc_permutations(seq03, len(seq03) -3 )) == 604800
+        assert len(n.calc_permutations(seq03, len(seq03) -4 )) == 151200
+        assert len(n.calc_permutations(seq03, len(seq03) -5 )) == 30240
+        assert len(n.calc_permutations(seq03, len(seq03) -6 )) == 5040
+        assert len(n.calc_permutations(seq03, len(seq03) -7 )) == 720
+
+    def test_calc_combinations(self):
+        n = run.NumpyCalc()
+        seq01 = ["a", "b", "c"]
+        assert len(n.calc_combinations(seq01, 3)) == 1
+        assert len(n.calc_combinations(seq01, 2)) == 3
+        assert len(n.calc_combinations(seq01, 1)) == 3
+        seq02 = ["a", "b", "c", "d", "e"]
+        assert len(n.calc_combinations(seq02, 5)) == 1
+        assert len(n.calc_combinations(seq02, 4)) == 5
+        assert len(n.calc_combinations(seq02, 3)) == 10
+        assert len(n.calc_combinations(seq02, 2)) == 10
+        assert len(n.calc_combinations(seq02, 1)) == 5
+        assert len(n.calc_combinations(seq02, 0)) == 1
 
     def test_calc_power(self):
         assert run.NumpyCalc.calc_power_cls(1, 2) == 1

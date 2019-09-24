@@ -54,7 +54,7 @@ jobs:
           when: always
           command: |
             pytest --version
-            pytest -v --show-capture=no --cache-clear --setup-show
+            pytest -v --show-capture=no --cache-clear --setup-show --durations=0
             pytest -v --show-capture=no --cache-clear --setup-show --randomly-seed=last
       - run:
           name: Output coverage report

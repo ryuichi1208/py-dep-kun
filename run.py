@@ -7,7 +7,7 @@ import sys
 import requests
 import functools
 
-from itertools import accumulate
+from itertools import accumulate, permutations, combinations
 from typing import Generator
 from multiprocessing import Pool
 from functools import lru_cache
@@ -121,6 +121,12 @@ class NumpyCalc(object):
         tmp = list(accumulate(accum))
         return tmp, sum(tmp)
 
+    def calc_permutations(self, perm: list, num: int) -> list:
+        return list(permutations(perm, num))
+
+    def calc_combinations(self, comb: list, num: int) -> list:
+        return list(combinations(comb, num))
+
     @classmethod
     def calc_power_cls(cls, num: int, que: int) -> float:
         if que < 1:
@@ -216,6 +222,41 @@ class OverrideMethods(object):
     def getDiscNum(self):
         return None
 
+    @staticmethod
+    def function_not():
+        print("No........authn...")
+        pass
+
+
+def auth_login(func, user_info: dict):
+    auth_list = {"admin": "admin", "test01": "password", "test02": "password"}
+    try:
+        for k in user_info.keys():
+            if auth_list[k] == user_info[k]:
+                print("Authentication succeeded")
+
+                def auth_exec_func(*args, **kwags):
+                    func(*args, **kwags)
+
+            else:
+                raise KeyError
+
+            return auth_exec_func
+    except KeyError:
+        print("Certification failed")
+
+        def auth_not_func(*args, **kargs):
+            # Function to call when authentication fails
+            OverrideMethods.function_not()
+
+        return auth_not_func
+
+def h(a, b=0):
+    print("aaa")
+
+@auth_login(h, {"admin": "admin"})
+def run():
+    print("a")
 
 if __name__ == "__main__":
     pass
