@@ -1,10 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#
+# This program is a run package to check the basic operation of Python.
+#
+
 import numpy
 import os
 import sys
+import re
 import requests
+import time
 import functools
 
 from itertools import accumulate, permutations, combinations
@@ -18,6 +24,35 @@ URL = "https://github.com/ryucihi1208/py-dep-kub"
 EMAIL = "ryucrosskey@gmail.com"
 AUTHOR = "ryucih1208"
 VERSION = "1.0.0"
+
+
+class UpdateNotice(object):
+
+    """
+    A single update notice (for instance, a security fix).
+    """
+
+    def __init__(self, elem=None, repoid=None, vlogger=None):
+        self._md = {
+            "from": "",
+            "type": "",
+            "title": "",
+            "release": "",
+            "status": "",
+            "version": "",
+            "pushcount": "",
+            "update_id": "",
+            "issued": "",
+            "updated": "",
+            "description": "",
+            "rights": "",
+            "severity": "",
+            "summary": "",
+            "solution": "",
+            "references": [],
+            "pkglist": [],
+            "reboot_suggested": False,
+        }
 
 
 def debug(p):
@@ -149,6 +184,17 @@ class NumpyCalc(object):
         return list(map(lambda x: x * x, ls))
 
 
+class UpdateXmlModule(object):
+    def __init__(self, repos=[], logger=None, vlogger=None):
+        self._notices = {}
+        self._cache = {}  # a pkg nvr => notice cache for quick lookups
+        self._no_cache = {}  # a pkg name only => notice list
+        self._repos = []  # list of repo ids that we've parsed
+
+        self._logger = logger
+        self._vlogger = vlogger
+
+
 class DecoFuncCls(object):
     def __init__(self, x, y, z=1):
         self.__x = x
@@ -197,6 +243,54 @@ class MultiProcTools(object):
             return pi * radius ** 2
 
         return circle_area
+
+
+class baseFailOverMethod:
+    """
+    A base class to provide a failover to switch to a new server if
+    the current one fails.
+    """
+
+    def __init__(self, repo):
+        self.repo = repo
+        self.failures = 0
+
+    def get_serverurl(self, i=None):
+        """
+        Return a server URL based on this failover method, or None
+        if there is a complete failure.  This method should always be
+        used to translate an index into a URL, as this object may
+        change how indexes map.
+        """
+        return None
+
+    def server_failed(self):
+        """
+        Notify the failover method that the current server has
+        failed.
+        """
+        self.failures = self.failures + 1
+
+    def reset(self, i=0):
+        """Reset the failures counter to the given index.
+        :param i: the index to reset the failures counter to
+        """
+        self.failures = i
+
+    def get_index(self):
+        """
+        Return the current number of failures, which is also the
+        current index into the list of URLs that this object
+        represents.
+        """
+        return self.failures
+
+    def len(self):
+        """
+        Return the total number of URLs available to cycle through
+        in this object.
+        """
+        return len(self.repo.urls)
 
 
 class OverrideMethods(object):
@@ -260,12 +354,49 @@ def auth_login(auth_login_fun, user_info: dict):
 
         return auth_not_func
 
+
 def do_http_request_exeption(url: str = "localhost", port: int = 443):
     print(url, port)
+
 
 @auth_login(do_http_request_exeption, {"admin": "admin"})
 def target_auth_login():
     pass
 
+
+class RepoVerifyProblem:
+    """ Holder for each "problem" we find with a repo.verify(). """
+
+    def __init__(self, type, msg, details, fake=False):
+        self.type = type
+        self.message = msg
+        self.details = details
+        self.fake = fake
+
+
 if __name__ == "__main__":
     pass
+
+PARSE_QUERY = """
+select pkgKey from packages
+where name %(op)s '%(q)s'
+   or name || '.' || arch %(op)s '%(q)s'
+   or name || '-' || version %(op)s '%(q)s'
+   or name || '-' || version || '-' || release %(op)s '%(q)s'
+   or name || '-' || version || '-' || release || '.' || arch %(op)s '%(q)s'
+   or epoch || ':' || name || '-' || version || '-' || release || '.' || arch %(op)s '%(q)s'
+   or name || '-' || epoch || ':' || version || '-' || release || '.' || arch %(op)s '%(q)s'
+"""
+
+
+_FULL_PARSE_QUERY_BEG = """
+SELECT pkgId,pkgKey,name,epoch,version,release,arch,
+  name || "." || arch AS sql_nameArch,
+  name || "-" || version || "-" || release || "." || arch AS sql_nameVerRelArch,
+  name || "-" || version AS sql_nameVer,
+  name || "-" || version || "-" || release AS sql_nameVerRel,
+  epoch || ":" || name || "-" || version || "-" || release || "." || arch AS sql_envra,
+  name || "-" || epoch || ":" || version || "-" || release || "." || arch AS sql_nevra
+  FROM packages
+  WHERE
+"""
