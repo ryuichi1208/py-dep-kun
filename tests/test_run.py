@@ -68,6 +68,19 @@ class TestNumpyCals:
         assert n.calc_arc_sin(9.0) == 1.5707963267948966
         assert n.calc_arc_sin(10.0) == 1.5707963267948966
 
+    def test_calc_arc_cos(self):
+        n = run.NumpyCalc()
+        assert n.calc_arc_cos(0.0) == 1.5707963267948966
+        assert n.calc_arc_cos(1.0) == 0.0
+        assert n.calc_arc_cos(2.0) == 0.0
+        assert n.calc_arc_cos(3.0) == 0.0
+        assert n.calc_arc_cos(4.0) == 0.0
+        assert n.calc_arc_cos(5.0) == 0.0
+        assert n.calc_arc_cos(6.0) == 0.0
+        assert n.calc_arc_cos(7.0) == 0.0
+        assert n.calc_arc_cos(8.0) == 0.0
+        assert n.calc_arc_cos(9.0) == 0.0
+
     def test_calc_sqlt(self):
         n = run.NumpyCalc()
         assert n.calc_sqrt(1) == 1
@@ -204,3 +217,11 @@ class TestDecoFuncCls:
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
         L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+
+class TestRepoVertifyProblem:
+    def test_init(self):
+        assert run.RepoVerifyProblem(str,"msg","details") != None
+
+    def test_init_repos(self):
+        assert run.baseFailOverMethod("repo") != None
+        assert run.baseFailOverMethod("repo").get_serverurl() == None
