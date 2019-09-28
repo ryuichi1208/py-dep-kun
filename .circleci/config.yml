@@ -30,7 +30,7 @@ jobs:
       name: py-executor
     steps:
       - checkout
-      - run: print_info
+      - print_info
       - run:
           name: Init enviroment
           when: always
