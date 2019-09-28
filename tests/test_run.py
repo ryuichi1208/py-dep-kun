@@ -220,8 +220,8 @@ class TestDecoFuncCls:
 
 class TestRepoVertifyProblem:
     def test_init(self):
-        assert run.RepoVerifyProblem(str,"msg","details") != None
+        assert run.RepoVerifyProblem(str,"msg","details") is not None
 
     def test_init_repos(self):
-        assert run.baseFailOverMethod("repo") != None
-        assert run.baseFailOverMethod("repo").get_serverurl() == None
+        assert run.baseFailOverMethod("repo") is not None
+        assert run.baseFailOverMethod("repo").get_serverurl() is None
