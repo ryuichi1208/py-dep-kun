@@ -30,6 +30,11 @@ jobs:
       name: py-executor
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - pip-package-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            # - pip-package-cache-v1-{{ .Branch }}-
+            # - pip-package-cache-v1-
       - print_info
       - run:
           name: Init enviroment
