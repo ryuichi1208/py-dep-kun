@@ -14,17 +14,23 @@ executors:
       image: circleci/classic:201808-01
       docker_layer_caching: true
 
+commands:
+  print_info:
+    description: "Display command information"
+    steps:
+      - run:
+          name: Print Info
+          when: always
+          command: |
+            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V && id
+
 jobs:
   lint_and_test:
     executor:
       name: py-executor
     steps:
       - checkout
-      - run:
-          name: Print info
-          when: always
-          command: |
-            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V && id
+      - run: print_info
       - run:
           name: Init enviroment
           when: always
