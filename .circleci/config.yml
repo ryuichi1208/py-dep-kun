@@ -30,6 +30,7 @@ commands:
           name: Docker Image Build
           when: always
           command: |
+            docker version
             docker image build .
             docker image ls
 
@@ -39,6 +40,8 @@ jobs:
       name: py-executor
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 18.09.3
       - restore_cache:
           keys:
             - pip-package-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
