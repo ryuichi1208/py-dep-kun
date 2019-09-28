@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@1.0.5
+  codecov: 'codecov/codecov@1.0.5'
+  microscanner: 'aquasecurity/microscanner@0.1.6'
 
 executors:
   py-executor:
@@ -100,6 +101,13 @@ jobs:
           key: pip-package-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - container_build
 
+  scan_image:
+    executor: microscanner/default
+    steps:
+      - checkout
+      - run:
+          name: Scan Image
+          command: 'docker build .'
 
   build_and_deploy:
     executor:
@@ -140,6 +148,15 @@ workflows:
             tags:
               only: /v.*/
       # Flow to be executed only when pushing with tag
+      - scan_image:
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+                - alpha
+            tags:
+              only: /v.*/
       - build_and_deploy:
           requires:
             - lint_and_test
