@@ -107,7 +107,7 @@ jobs:
       - checkout
       - run:
           name: Scan Image
-          command: 'docker build .'
+          command: 'docker build -t myapp001 .'
 
   build_and_deploy:
     executor:
@@ -165,3 +165,8 @@ workflows:
               only: /v.*/
             branches:
               ignore: /.*/
+      - microscanner/scan-image:
+          requires:
+            - scan_image
+          context: myContext
+          image: 'myapp001'
