@@ -105,6 +105,7 @@ jobs:
     executor: microscanner/default
     steps:
       - checkout
+      - print_info
       - run:
           name: Scan Image
           command: |
@@ -114,6 +115,8 @@ jobs:
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN}
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.html
       - store_artifacts:
+          path: index.hmtl
+      - store_test_results:
           path: index.hmtl
 
   build_and_deploy:
