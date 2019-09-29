@@ -108,8 +108,10 @@ jobs:
       - run:
           name: Scan Image
           command: |
+            ./script/rewrite_dockerfile.sh Dockerfile
             docker image build -t py-dep-kun:1.0 .
             docker image ls
+            docker run -it py-dep-kun:1.0 --entrypoint ./microscanner ${MICROSCANNER_TOKEN}
 
   build_and_deploy:
     executor:
@@ -167,7 +169,4 @@ workflows:
                 - alpha
             tags:
               only: /v.*/
-      - microscanner/scan-image:
-          requires:
-            - scan_image
-          image: "python:3.7.4-alpine3.9"
+          context: MicroScanner
