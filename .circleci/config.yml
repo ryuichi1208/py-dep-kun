@@ -114,6 +114,7 @@ jobs:
             docker image ls
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN}
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.html
+            ls -lRt && pwd
       - store_artifacts:
           path: index.hmtl
       - store_test_results:
@@ -175,4 +176,4 @@ workflows:
                 - alpha
             tags:
               only: /v.*/
-          context: MicroScanner
+          context: MicroScdocker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.htmlanner
