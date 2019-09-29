@@ -109,7 +109,7 @@ jobs:
           name: Scan Image
           command: |
             docker image build -t py:1.0 .
-            docker image ls"
+            docker image ls
 
   build_and_deploy:
     executor:
