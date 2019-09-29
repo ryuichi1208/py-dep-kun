@@ -107,7 +107,7 @@ jobs:
       - checkout
       - run:
           name: Scan Image
-          command: 'docker build -t py-dep-kun/myapp001:0.1 .'
+          command: "docker build ."
 
   build_and_deploy:
     executor:
@@ -168,4 +168,4 @@ workflows:
       - microscanner/scan-image:
           requires:
             - scan_image
-          image: 'py-dep-kun/myapp001:0.1'
+          image: "ryuichi1208/py-dep-kun"
