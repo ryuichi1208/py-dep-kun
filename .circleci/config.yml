@@ -110,15 +110,14 @@ jobs:
           name: Scan Image
           command: |
             ./script/rewrite_dockerfile.sh Dockerfile
-            docker image build -t py-dep-kun:1.0 .
+            docker image build -t py-dep-kun:${CIRCLE_TAG} .
             docker image ls
-            docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN}
-            docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.html
-            ls -lRt && pwd
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_TAG} ${MICROSCANNER_TOKEN}
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_TAG} ${MICROSCANNER_TOKEN} --html > index.html
       - store_artifacts:
-          path: index.hmtl
+          path: index.html
       - store_test_results:
-          path: index.hmtl
+          path: index.html
 
   build_and_deploy:
     executor:
