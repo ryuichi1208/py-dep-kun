@@ -12,6 +12,7 @@ import re
 import requests
 import time
 import functools
+from functools import singledispatch
 
 from itertools import accumulate, permutations, combinations
 from typing import Generator
@@ -400,3 +401,8 @@ SELECT pkgId,pkgKey,name,epoch,version,release,arch,
   FROM packages
   WHERE
 """
+
+class AsyncLambdaImport(object):
+    def lambda_list(self) -> list:
+        L = list(map(lambda x:x**x, (1,2,3)))
+        return L

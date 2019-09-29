@@ -217,6 +217,16 @@ class TestDecoFuncCls:
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
         L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
+        L1, L2 = {1, 2, 3}, {3, 4, 5}
+        assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
 
 class TestRepoVertifyProblem:
     def test_init(self):
@@ -225,3 +235,6 @@ class TestRepoVertifyProblem:
     def test_init_repos(self):
         assert run.baseFailOverMethod("repo") is not None
         assert run.baseFailOverMethod("repo").get_serverurl() is None
+
+    def test_init_report(self):
+        assert run.AsyncLambdaImport()
