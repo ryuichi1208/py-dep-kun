@@ -168,5 +168,4 @@ workflows:
       - microscanner/scan-image:
           requires:
             - scan_image
-          context: myContext
           image: 'py-dep-kun/myapp001:0.1'
