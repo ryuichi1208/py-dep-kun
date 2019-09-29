@@ -107,7 +107,9 @@ jobs:
       - checkout
       - run:
           name: Scan Image
-          command: "docker build ."
+          command: |
+            "docker build -t py-dep-kun:1.0 ."
+            "docker image ls"
 
   build_and_deploy:
     executor:
@@ -148,6 +150,14 @@ workflows:
             tags:
               only: /v.*/
       # Flow to be executed only when pushing with tag
+      - build_and_deploy:
+          requires:
+            - lint_and_test
+          filters:
+            tags:
+              only: /v.*/
+            branches:
+              ignore: /.*/
       - scan_image:
           filters:
             branches:
@@ -157,15 +167,7 @@ workflows:
                 - alpha
             tags:
               only: /v.*/
-      - build_and_deploy:
-          requires:
-            - lint_and_test
-          filters:
-            tags:
-              only: /v.*/
-            branches:
-              ignore: /.*/
       - microscanner/scan-image:
           requires:
             - scan_image
-          image: "ryuichi1208/py-dep-kun"
+          image: "py-dep-kun:1.0"
