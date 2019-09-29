@@ -29,11 +29,28 @@ numpy==1.17.2
 pylint==2.3.1
 pytest==5.1.2
 pytest-cov==2.7.1
+pytest-randomly==3.1.0
 black==19.3b0
 pycodestyle==2.5.0
 mypy==0.720
 mypy-extensions==0.4.1
 codecov==2.0.15
+PyYAML==5.1.2
+redis==3.3.8
+requests==2.22.0
+rope==0.14.0
+rsa==4.0
+setuptools==41.2.0
+six==1.12.0
+slackweb==1.0.5
+soupsieve==1.9.3
+toml==0.10.0
+tqdm==4.35.0
+typed-ast==1.4.0
+typing-extensions==3.7.4
+uptime==3.0.1
+urllib3==1.25.3
+utils==0.9.0
 ```
 
 ## To deploy
