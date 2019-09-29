@@ -170,4 +170,4 @@ workflows:
       - microscanner/scan-image:
           requires:
             - scan_image
-          image: "py-dep-kun:1.0"
+          image: "python:3.7.4-alpine3.9"
