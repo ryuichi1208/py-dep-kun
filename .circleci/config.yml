@@ -114,7 +114,7 @@ jobs:
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN}
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.html
       - store_artifacts:
-          path: htmlcov
+          path: index.hmtl
 
   build_and_deploy:
     executor:
