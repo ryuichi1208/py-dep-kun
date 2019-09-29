@@ -113,11 +113,12 @@ jobs:
             docker image build -t py-dep-kun:${CIRCLE_BUILD_NUM} .
             docker image ls
             docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_BUILD_NUM} ${MICROSCANNER_TOKEN}
-            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_BUILD_NUM} ${MICROSCANNER_TOKEN} --html > index.html
+            mkdir $(pwd)/microscanner
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_BUILD_NUM} ${MICROSCANNER_TOKEN} --html > $(pwd)/microscanner/index.html
       - store_artifacts:
-          path: index.html
+          path: microscanner
       - store_test_results:
-          path: index.html
+          path: microscanner
 
   build_and_deploy:
     executor:
