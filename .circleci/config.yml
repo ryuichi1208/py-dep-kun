@@ -176,4 +176,4 @@ workflows:
                 - alpha
             tags:
               only: /v.*/
-          context: MicroScdocker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN} --html > index.htmlanner
+          context: MicroScdocker
