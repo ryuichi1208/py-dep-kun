@@ -111,7 +111,7 @@ jobs:
             ./script/rewrite_dockerfile.sh Dockerfile
             docker image build -t py-dep-kun:1.0 .
             docker image ls
-            docker run -it py-dep-kun:1.0 --entrypoint ./microscanner ${MICROSCANNER_TOKEN}
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:1.0 ${MICROSCANNER_TOKEN}
 
   build_and_deploy:
     executor:
