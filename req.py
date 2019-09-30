@@ -3,24 +3,53 @@
 
 import os
 import sys
-import requests
-import json
+import collections
+import functools
+import asyncio
+import aiohttp
 
-host = "api.github.com"
+@functools.singledispatch
+def regist_functions(L):
+    return L
 
-def pre_http_exec(func):
-    def wapper(*args, **kwargs):
-        print(host)
-        func(*args, **kwargs)
-        print("02")
-    return wapper
+@regist_functions.register(list)
+def deque_pop(L: list) -> collections.deque:
+    try:
+        ret = collections.deque(L)
+    except Exception:
+        print("Not iterable")
+    else:
+        print("Iterable")
 
-@pre_http_exec(host)
-def exec_http_requests(url: str, headers: dict = {}, params: dict = {}):
-    ret = requests.get(url)
+    print(ret)
+    return ret if ret else None
 
-def run():
-    exec_http_requests("aaa")
+@regist_functions.register(dict)
+def deque_dict(L: dict) -> collections.defaultdict:
+    print("dict")
+    return collections.defaultdict(L)
 
-if __name__ == "__main__":
-    run()
+async def coros(seconds: int, value: int):
+    await asyncio.sleep(seconds)
+    return value + 100
+
+# create new invent loop
+# asyncio.run(coros(2,100))
+# print(10)
+
+def gen_func1():
+    for i in range(3):
+        yield i
+
+def gen_func2():
+    for i in range(3):
+        yield i
+
+def gen_wrapper(gen_func1, gen_func2):
+    yield from gen_func1()
+    yield from gen_func2()
+    yield from ["a", "b"]
+
+# for i in gen_wrapper(gen_func1, gen_func2):
+#     print(i)
+
