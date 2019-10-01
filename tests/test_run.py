@@ -110,6 +110,16 @@ class TestNumpyCals:
         accum = [1, 2, 3, 4, 5]
         assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
 
+    def test_calc_array_broadcast(self):
+        n = run.NumpyCalc()
+        n.calc_array_broadcash([])
+        n.calc_array_broadcash([1,2,3])
+        n.calc_array_broadcash([2,2,4])
+        n.calc_array_broadcash([3,2,5])
+        n.calc_array_broadcash([4,2,6])
+        n.calc_array_broadcash([5,2,7])
+        n.calc_array_broadcash([6,2,8])
+
     def test_calc_permutations(self):
         n = run.NumpyCalc()
         seq01 = ["a", "b", "c"]

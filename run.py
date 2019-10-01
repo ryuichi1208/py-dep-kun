@@ -163,6 +163,9 @@ class NumpyCalc(object):
     def calc_combinations(self, comb: list, num: int) -> list:
         return list(combinations(comb, num))
 
+    def calc_array_broadcash(self, ls: list):
+        return numpy.array(ls)
+
     @classmethod
     def calc_power_cls(cls, num: int, que: int) -> float:
         if que < 1:
