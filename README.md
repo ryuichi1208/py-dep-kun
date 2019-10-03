@@ -53,6 +53,19 @@ urllib3==1.25.3
 utils==0.9.0
 ```
 
+## Authn
+
+```
+jobs:
+  build:
+    docker:
+      - image: acme-private/private-image:321
+        auth:
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+```
+
 ## To deploy
 
 [ryuichi1208/py-dep-kun](https://cloud.docker.com/repository/registry-1.docker.io/ryuichi1208/py-dep-kun)
