@@ -55,7 +55,7 @@ utils==0.9.0
 
 ## Authn
 
-```
+``` yaml
 jobs:
   build:
     docker:
