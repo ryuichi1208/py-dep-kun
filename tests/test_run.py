@@ -113,12 +113,12 @@ class TestNumpyCals:
     def test_calc_array_broadcast(self):
         n = run.NumpyCalc()
         n.calc_array_broadcash([])
-        n.calc_array_broadcash([1,2,3])
-        n.calc_array_broadcash([2,2,4])
-        n.calc_array_broadcash([3,2,5])
-        n.calc_array_broadcash([4,2,6])
-        n.calc_array_broadcash([5,2,7])
-        n.calc_array_broadcash([6,2,8])
+        n.calc_array_broadcash([1, 2, 3])
+        n.calc_array_broadcash([2, 2, 4])
+        n.calc_array_broadcash([3, 2, 5])
+        n.calc_array_broadcash([4, 2, 6])
+        n.calc_array_broadcash([5, 2, 7])
+        n.calc_array_broadcash([6, 2, 8])
 
     def test_calc_permutations(self):
         n = run.NumpyCalc()
@@ -238,9 +238,10 @@ class TestDecoFuncCls:
         L1, L2 = {1, 2, 3}, {3, 4, 5}
         assert n.collective_re(L1, L2) == ({1, 2, 3, 4, 5}, {3})
 
+
 class TestRepoVertifyProblem:
     def test_init(self):
-        assert run.RepoVerifyProblem(str,"msg","details") is not None
+        assert run.RepoVerifyProblem(str, "msg", "details") is not None
 
     def test_init_repos(self):
         assert run.baseFailOverMethod("repo") is not None

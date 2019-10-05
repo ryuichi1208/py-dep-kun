@@ -69,6 +69,7 @@ class TestDecoFuncCls:
         assert out_exec_functions(1) == 3.141592
         assert out_exec_functions(2) == 12.566368
 
+
 # label_lines = [line.rstrip() for line in tf.gfile.GFile('retrained_labels.txt')]
 # with tf.gfile.FastGFile('retrained_graph.pb', 'rb') as f:
 #     graph_def = tf.GraphDef()
