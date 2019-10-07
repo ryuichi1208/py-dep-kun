@@ -26,6 +26,28 @@ class TestNumpyCals:
         assert n.calc_sin(9.0) == 0.8414709848078965
         assert n.calc_sin(10.0) == 0.8414709848078965
 
+    def test_calc_radians(self):
+        n = run.NumpyCalc()
+        assert n.calc_radians(0) == 0.0
+        assert n.calc_radians(1) == 0.017453292519943295
+        assert n.calc_radians(2) == 0.017453292519943295
+        assert n.calc_radians(3) == 0.017453292519943295
+        assert n.calc_radians(4) == 0.017453292519943295
+        assert n.calc_radians(5) == 0.017453292519943295
+        assert n.calc_radians(6) == 0.017453292519943295
+        assert n.calc_radians(7) == 0.017453292519943295
+        assert n.calc_radians(8) == 0.017453292519943295
+        assert n.calc_radians(9) == 0.017453292519943295
+        assert n.calc_radians(10) == 0.017453292519943295
+
+    def test_calc_exp(self):
+        n = run.NumpyCalc()
+        assert n.calc_exp(0) == 1.0
+
+    def test_calc_log(self):
+        n = run.NumpyCalc()
+        assert n.calc_log(2) == 0.6931471805599453
+
     def test_calc_cos(self):
         n = run.NumpyCalc()
         assert n.calc_cos(0.0) == 1.0
