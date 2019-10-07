@@ -14,6 +14,10 @@ def print_results(results):
     print("=======================")
 
 
+def main():
+    pass
+
+
 if __name__ == "__main__":
     try:
         sys.exit(main())

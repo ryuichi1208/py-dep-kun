@@ -12,6 +12,7 @@ import re
 import requests
 import time
 import functools
+import logging
 
 from itertools import accumulate, permutations, combinations
 from typing import Generator
@@ -25,8 +26,10 @@ EMAIL = "ryucrosskey@gmail.com"
 AUTHOR = "ryucih1208"
 VERSION = "1.0.0"
 
+logging.basicConfig(level=logging.DEBUG)
 
-class UpdateNotice(object):
+
+class UpdateNojice(object):
 
     """
     A single update notice (for instance, a security fix).
@@ -400,3 +403,18 @@ SELECT pkgId,pkgKey,name,epoch,version,release,arch,
   FROM packages
   WHERE
 """
+
+class DevSecClass(object):
+    """
+    This class is a diffial use that inherits the base class.
+    """
+    def __init__(self):
+        self.DSC_NUMBER = 20.0
+        self.DSC_VERSION = "1.0.0"
+        self.DSC_NAME = __name__
+        self.DSC_DOC = __doc__
+        self.DSC_AUTHO = None
+
+    def ret_dir_functions(self):
+        return tuple([d for d in tuple(dir(self))])
+
