@@ -13,8 +13,10 @@ import requests
 import time
 import functools
 import logging
-from functools import singledispatch
+import concurrent.futures
+import datetime
 
+from functools import singledispatch
 from itertools import accumulate, permutations, combinations
 from typing import Generator
 from multiprocessing import Pool
@@ -408,10 +410,12 @@ SELECT pkgId,pkgKey,name,epoch,version,release,arch,
   WHERE
 """
 
+
 class DevSecClass(object):
     """
     This class is a diffial use that inherits the base class.
     """
+
     def __init__(self):
         self.DSC_NUMBER = 20.0
         self.DSC_VERSION = "1.0.0"
@@ -427,3 +431,15 @@ class AsyncLambdaImport(object):
     def lambda_list(self) -> list:
         L = list(map(lambda x: x ** x, (1, 2, 3)))
         return L
+
+
+class ProccessCreateClass(object):
+    def _sleep(self, num):
+        time.sleep(num)
+        return num
+
+    def proc_create(self, num: int, nums: list):
+        with concurrent.futures.ProcessPoolExecutor(max_workers=num) as executor:
+            results = executor.map(self._sleep, nums)
+            for result in results:
+                print(f"{result} : {datetime.datetime.now()}")

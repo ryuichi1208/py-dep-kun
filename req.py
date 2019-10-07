@@ -9,6 +9,7 @@ import asyncio
 import aiohttp
 import concurrent.futures
 import math
+from Crypto.Cipher import AES
 
 
 @functools.singledispatch
@@ -80,3 +81,11 @@ def process_create_function(n: list) -> bool:
     with concurrent.futures.ProcessPoolExecutor(max_workers=2) as executor:
         for number, prime in zip(n, executor.map(is_prime, n)):
             print(f"{number} is prime")
+
+def do_encrypto(key: str, iv=b'0*'*16):
+    aes = AES.new(key, AES.MODE_CBC, iv)
+    cipher = aes.encrypt("python script000".encode("ascii"))
+    return cipher
+
+do_encrypto("aaa")
+

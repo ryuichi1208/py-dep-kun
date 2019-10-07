@@ -75,3 +75,11 @@ class TestDecoFuncCls:
 #     graph_def = tf.GraphDef()
 #     graph_def.ParseFromString(f.read())
 #     _ = tf.import_graph_def(graph_def, name='')
+
+
+class TestCreateProc:
+    def test_proc_create(self):
+        n = run.ProccessCreateClass()
+        n.proc_create(2, [1, 2, 3])
+        n.proc_create(2, [1, 1, 1])
+        n.proc_create(6, [1, 2, 3])

@@ -8,9 +8,7 @@ pycodestyle==2.5.0
 mypy==0.720
 mypy-extensions==0.4.1
 codecov==2.0.15
-<<<<<<< HEAD
 logger==1.4
-=======
 PyYAML==5.1.2
 redis==3.3.8
 requests==2.22.0
@@ -27,5 +25,5 @@ typing-extensions==3.7.4
 uptime==3.0.1
 urllib3==1.25.3
 utils==0.9.0
-
->>>>>>> 87811c8bcf3a42373a46b1e88a0a9a1448e6c926
+pycryptodome==3.9.0
+aiohttp==3.6.1
