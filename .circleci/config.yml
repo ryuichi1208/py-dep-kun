@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@1.0.5
+  codecov: 'codecov/codecov@1.0.5'
+  microscanner: 'aquasecurity/microscanner@0.1.6'
 
 executors:
   py-executor:
@@ -14,17 +15,40 @@ executors:
       image: circleci/classic:201808-01
       docker_layer_caching: true
 
+commands:
+  print_info:
+    description: "Display command information"
+    steps:
+      - run:
+          name: Print Info
+          when: always
+          command: |
+            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V && id
+  container_build:
+    description: "Docker image build"
+    steps:
+      - run:
+          name: Docker Image Build
+          when: always
+          command: |
+            docker version
+            docker image build .
+            docker image ls
+
 jobs:
   lint_and_test:
     executor:
       name: py-executor
     steps:
       - checkout
-      - run:
-          name: Print info
-          when: always
-          command: |
-            ls -lRt && pwd && uname -a && git tag --list && python -V && pip -V && id
+      - setup_remote_docker:
+          version: 18.09.3
+      - restore_cache:
+          keys:
+            - pip-package-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            # - pip-package-cache-v1-{{ .Branch }}-
+            # - pip-package-cache-v1-
+      - print_info
       - run:
           name: Init enviroment
           when: always
@@ -71,6 +95,30 @@ jobs:
           when: always
           command: |
             codecov
+      - save_cache:
+          paths:
+            - ./script/helbin
+          key: pip-package-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - container_build
+
+  scan_image:
+    executor: microscanner/default
+    steps:
+      - checkout
+      - print_info
+      - run:
+          name: Scan Image
+          command: |
+            ./script/rewrite_dockerfile.sh Dockerfile
+            docker image build -t py-dep-kun:${CIRCLE_BUILD_NUM} .
+            docker image ls
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_BUILD_NUM} ${MICROSCANNER_TOKEN}
+            mkdir $(pwd)/microscanner
+            docker run --entrypoint /home/api/microscanner -it py-dep-kun:${CIRCLE_BUILD_NUM} ${MICROSCANNER_TOKEN} --html > $(pwd)/microscanner/index.html
+      - store_artifacts:
+          path: microscanner
+      - store_test_results:
+          path: microscanner
 
   build_and_deploy:
     executor:
@@ -119,3 +167,13 @@ workflows:
               only: /v.*/
             branches:
               ignore: /.*/
+      - scan_image:
+          filters:
+            branches:
+              only:
+                - master
+                - beta
+                - alpha
+            tags:
+              only: /v.*/
+          context: MicroScanner

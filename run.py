@@ -13,6 +13,7 @@ import requests
 import time
 import functools
 import logging
+from functools import singledispatch
 
 from itertools import accumulate, permutations, combinations
 from typing import Generator
@@ -164,6 +165,9 @@ class NumpyCalc(object):
 
     def calc_combinations(self, comb: list, num: int) -> list:
         return list(combinations(comb, num))
+
+    def calc_array_broadcash(self, ls: list):
+        return numpy.array(ls)
 
     @classmethod
     def calc_power_cls(cls, num: int, que: int) -> float:
@@ -418,3 +422,8 @@ class DevSecClass(object):
     def ret_dir_functions(self):
         return tuple([d for d in tuple(dir(self))])
 
+
+class AsyncLambdaImport(object):
+    def lambda_list(self) -> list:
+        L = list(map(lambda x: x ** x, (1, 2, 3)))
+        return L

@@ -11,6 +11,25 @@ import pytest
 import os
 
 
+@pytest.fixture
+def class_init_fixture():
+    send_msg_001 = "TestMessage"
+    send_msg_002 = "TestMessage__"
+    send_msg_003 = "__TestMessage"
+    send_msg_004 = "TestMessage" * 1024
+    send_msg_005 = None
+
+    return run.MultiProcTools(), send_msg_001
+
+
+class TestFixtureMethodTest(object):
+    def test_calc_once(self, class_init_fixture):
+        n, msg = class_init_fixture
+        assert n.calc_reduce(1) == 0
+        assert n.calc_reduce(8) == 24
+        assert n.calc_reduce(16) == 112
+
+
 class TestDecoFuncCls:
     def test_calc_reduce(self):
         n = run.MultiProcTools()
@@ -44,8 +63,15 @@ class TestDecoFuncCls:
         assert out_exec_functions(1) == 3.14
         assert out_exec_functions(2) == 12.56
 
-    def test_gen_circle_area_func01(self):
+    def test_gen_circle_area_func02(self):
         n = run.MultiProcTools()
         out_exec_functions = n.gen_circle_area_func(3.141592)
         assert out_exec_functions(1) == 3.141592
         assert out_exec_functions(2) == 12.566368
+
+
+# label_lines = [line.rstrip() for line in tf.gfile.GFile('retrained_labels.txt')]
+# with tf.gfile.FastGFile('retrained_graph.pb', 'rb') as f:
+#     graph_def = tf.GraphDef()
+#     graph_def.ParseFromString(f.read())
+#     _ = tf.import_graph_def(graph_def, name='')
