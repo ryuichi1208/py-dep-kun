@@ -444,7 +444,7 @@ class ProccessCreateClass(object):
             for result in results:
                 print(f"{result} : {datetime.datetime.now()}")
 
-    def ret_shaping_string(self, switch: int, mmo: str) -> str:
+    def ret_shaping_string(self, switch: int, mmo: str):
         try:
             if switch == 0:
                 return f"{int(mmo):04}"
