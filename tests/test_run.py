@@ -271,3 +271,20 @@ class TestRepoVertifyProblem:
 
     def test_init_report(self):
         assert run.AsyncLambdaImport()
+
+    def test_ret_shaping_string(self):
+        p = run.ProccessCreateClass()
+        assert p.ret_shaping_string(0, "1") == "0001"
+        assert p.ret_shaping_string(0, "10") == "0010"
+        assert p.ret_shaping_string(0, "1111") == "1111"
+        assert p.ret_shaping_string(1, "0.2") == "20.00%"
+        assert p.ret_shaping_string(1, "0.23") == "23.00%"
+        assert p.ret_shaping_string(1, "0.246") == "24.60%"
+        assert p.ret_shaping_string(2, "255") == "0b11111111"
+        assert p.ret_shaping_string(3, "255") == "0xff"
+        assert p.ret_shaping_string(4, "255") == "255"
+
+        # with pytest.raises(ValueError) as e_info:
+        #     p.ret_shaping_string(0, "HHH")
+
+        assert p.ret_shaping_string(0, "AAA") is None
