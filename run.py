@@ -443,3 +443,19 @@ class ProccessCreateClass(object):
             results = executor.map(self._sleep, nums)
             for result in results:
                 print(f"{result} : {datetime.datetime.now()}")
+
+    def ret_shaping_string(self, switch: int, mmo: str) -> str:
+        try:
+            if switch == 0:
+                return f"{int(mmo):04}"
+            elif switch == 1:
+                return f"{float(mmo):.2%}"
+            elif switch == 2:
+                return f"{int(mmo):#b}"
+            elif switch == 3:
+                return f"{int(mmo):#x}"
+            elif switch == 4:
+                return f"{st}"
+        except ValueError as ve:
+            print("Only int or float can be specified as an argument.")
+            return None
