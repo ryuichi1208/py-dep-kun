@@ -455,7 +455,7 @@ class ProccessCreateClass(object):
             elif switch == 3:
                 return f"{int(mmo):#x}"
             elif switch == 4:
-                return f"{st}"
+                return f"{mmo}"
         except ValueError as ve:
             print("Only int or float can be specified as an argument.")
             return None
