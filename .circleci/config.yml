@@ -60,7 +60,7 @@ jobs:
           name: Run Pylint
           when: always
           command : |
-            pylint run.py && echo 0
+            pylint run.py || echo 0
       - run:
           name: Run black
           when: always
