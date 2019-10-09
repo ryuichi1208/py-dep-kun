@@ -32,7 +32,8 @@ commands:
           when: always
           command: |
             docker version
-            docker image build .
+            IMAGE_TAG=$(echo ${CIRCLE_JOB} | tr "[:upper:]" "[:lower:"])
+            docker image build -t ${IMAGE_TAG} .
             docker image ls
 
 jobs:

@@ -17,7 +17,7 @@ import concurrent.futures
 import datetime
 
 from functools import singledispatch
-from itertools import accumulate, permutations, combinations
+from itertools import accumulate, permutations, combinations, islice
 from typing import Generator
 from multiprocessing import Pool
 from functools import lru_cache
@@ -432,6 +432,12 @@ class AsyncLambdaImport(object):
         L = list(map(lambda x: x ** x, (1, 2, 3)))
         return L
 
+    def is_slice_iterable(self, iterable):
+        ans = 0
+        for line in islice(iterable, 3):
+            ans += line
+        else:
+            return ans
 
 class ProccessCreateClass(object):
     def _sleep(self, num):

@@ -9,7 +9,8 @@ import asyncio
 import aiohttp
 import concurrent.futures
 import math
-from Crypto.Cipher import AES
+import pickle
+# from Crypto.Cipher import AES
 
 
 @functools.singledispatch
@@ -82,10 +83,10 @@ def process_create_function(n: list) -> bool:
         for number, prime in zip(n, executor.map(is_prime, n)):
             print(f"{number} is prime")
 
-def do_encrypto(key: str, iv=b'0*'*16):
-    aes = AES.new(key, AES.MODE_CBC, iv)
-    cipher = aes.encrypt("python script000".encode("ascii"))
-    return cipher
+# def do_encrypto(key: str, iv=b'0*'*16):
+#     aes = AES.new(key, AES.MODE_CBC, iv)
+#     cipher = aes.encrypt("python script000".encode("ascii"))
+#     return cipher
 
 class DefPrintMethod(object):
     """
@@ -116,5 +117,21 @@ class DefPrintMethod(object):
      __subclasshook__
      __weakref__
     """
-    pass
 
+    def create_pickle(self, obj, fd):
+        if obj is not  None:
+            pickle.dump(obj, fd)
+
+    def load_picke(self, pickle_file: str):
+        try:
+            os.stat(pickle_file)
+        except FileNotFoundError:
+            return None
+
+    def do_pickle_dump(self, obj:object, filename: str) -> int:
+        try:
+            with open(filename, "wb") as f:
+                pickle.dump(obj, f)
+            return 0
+        except Exception:
+            return 1

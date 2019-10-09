@@ -6,9 +6,11 @@ import sys
 sys.path.append(".")
 
 import run
+import time
 import re
 import pytest
 import os
+import pings
 
 
 @pytest.fixture
@@ -83,3 +85,18 @@ class TestCreateProc:
         n.proc_create(2, [1, 2, 3])
         n.proc_create(2, [1, 1, 1])
         n.proc_create(6, [1, 2, 3])
+
+
+@pytest.fixture
+@pytest.mark.timeout(10)
+def pre_send_icmp():
+    pm = pings.Ping()
+    res = pm.ping("localhost")
+
+    if res.is_reached():
+        print("Reachable")
+    else:
+        print("Not reachable")
+
+def test_fixture_do_nothing(pre_send_icmp):
+    pass
