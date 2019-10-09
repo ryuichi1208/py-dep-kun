@@ -6,6 +6,7 @@ logger==1.4
 mypy-extensions==0.4.1
 mypy==0.720
 numpy==1.17.2
+pings==0.0.1
 pycodestyle==2.5.0
 pycryptodome==3.9.0
 pylint==2.4.2
