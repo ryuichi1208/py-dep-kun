@@ -15,6 +15,7 @@ import functools
 import logging
 import concurrent.futures
 import datetime
+import pandas
 
 from functools import singledispatch
 from itertools import accumulate, permutations, combinations, islice
@@ -465,3 +466,13 @@ class ProccessCreateClass(object):
         except ValueError as ve:
             print("Only int or float can be specified as an argument.")
             return None
+
+class LibWrapper(object):
+    pass
+
+class PandasWrapper(LibWrapper):
+    def pd_range(self, date, periods=10):
+        dates = pandas.date_range(date, periods=periods)
+        nums = numpy.random.randint(0, 100, (10, 2))
+        colums = ["testA", "testB"]
+        return pandas.DataFrame(nums, index=dates, columns=colums)

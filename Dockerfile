@@ -23,4 +23,3 @@ RUN apk --update-cache --no-cache \
     && . py-dep-kun/bin/activate \
     && pip install --upgrade pip \
     && pip install -r requirements.txt
-
