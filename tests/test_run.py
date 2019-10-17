@@ -9,9 +9,21 @@ import run
 import re
 import pytest
 import os
+from operator import add, mul
 
 
 class TestNumpyCals:
+    def test_raise_user_exception(self):
+        """
+        Exception error tests.
+        """
+        with pytest.raises(run.PatternNotFoundException):
+            raise run.PatternNotFoundException
+
+    def test_init_class(self):
+        run.UpdateNojice()
+        n = run.DevSecClass()
+
     def test_calc_sin(self):
         n = run.NumpyCalc()
         assert n.calc_sin(0.0) == 0.0
@@ -131,6 +143,11 @@ class TestNumpyCals:
         assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
         accum = [1, 2, 3, 4, 5]
         assert n.calc_accumulate(accum) == ([1, 3, 6, 10, 15], 35)
+
+    def test_calc_accumulate_mal(self):
+        n = run.NumpyCalc()
+        accum = [1, 2, 3, 4, 5]
+        assert n.calc_accumulate_mul(accum) == [1, 2, 6, 24, 120]
 
     def test_calc_array_broadcast(self):
         n = run.NumpyCalc()
