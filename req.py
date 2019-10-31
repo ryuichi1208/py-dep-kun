@@ -153,4 +153,8 @@ class HeapQueControl(object):
         return heapq.heappush(self.al, ins)
 
     def switch_insert(self, st: str):
-        return True if st in ["proc_start", "proc_end", "proc_wait", "proc_unwait"] else False
+        return (
+            True
+            if st in ["proc_start", "proc_end", "proc_wait", "proc_unwait"]
+            else False
+        )
