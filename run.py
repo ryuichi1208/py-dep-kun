@@ -15,7 +15,9 @@ import functools
 import logging
 import concurrent.futures
 import datetime
+import pandas
 
+from operator import add, mul
 from functools import singledispatch
 from itertools import accumulate, permutations, combinations, islice
 from typing import Generator
@@ -161,6 +163,9 @@ class NumpyCalc(object):
     def calc_accumulate(self, accum: list) -> tuple:
         tmp = list(accumulate(accum))
         return tmp, sum(tmp)
+
+    def calc_accumulate_mul(self, accum: list) -> list:
+        return list(accumulate(accum, mul))
 
     def calc_permutations(self, perm: list, num: int) -> list:
         return list(permutations(perm, num))
@@ -466,3 +471,20 @@ class ProccessCreateClass(object):
         except ValueError as ve:
             print("Only int or float can be specified as an argument.")
             return None
+
+
+class LibWrapper(object):
+    pass
+
+
+class PandasWrapper(LibWrapper):
+    def pd_range(self, date, periods=10):
+        dates = pandas.date_range(date, periods=periods)
+        nums = numpy.random.randint(0, 100, (10, 2))
+        colums = ["testA", "testB"]
+        return pandas.DataFrame(nums, index=dates, columns=colums)
+
+
+class PatternNotFoundException(Exception):
+    def __str__(self):
+        return "Not pattern match"

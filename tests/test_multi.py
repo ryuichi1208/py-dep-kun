@@ -99,6 +99,7 @@ def pre_send_icmp():
     else:
         print("Not reachable")
 
+
 def test_fixture_do_nothing(pre_send_icmp):
     pass
 

@@ -154,5 +154,3 @@ class HeapQueControl(object):
 
     def switch_insert(self, st: str):
         return True if st in ["proc_start", "proc_end", "proc_wait", "proc_unwait"] else False
-
-hq = HeapQueControl([])

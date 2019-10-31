@@ -53,6 +53,12 @@ urllib3==1.25.3
 utils==0.9.0
 ```
 
+## Do lint
+
+```
+$ docker run -ti -v $(pwd):/app --workdir=/app coala/base coala --files run.py --bears PEP8Bear
+```
+
 ## Authn
 
 ``` yaml
