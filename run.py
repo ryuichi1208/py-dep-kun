@@ -15,7 +15,6 @@ import functools
 import logging
 import concurrent.futures
 import datetime
-import pandas
 
 from operator import add, mul
 from functools import singledispatch
@@ -475,14 +474,6 @@ class ProccessCreateClass(object):
 
 class LibWrapper(object):
     pass
-
-
-class PandasWrapper(LibWrapper):
-    def pd_range(self, date, periods=10):
-        dates = pandas.date_range(date, periods=periods)
-        nums = numpy.random.randint(0, 100, (10, 2))
-        colums = ["testA", "testB"]
-        return pandas.DataFrame(nums, index=dates, columns=colums)
 
 
 class PatternNotFoundException(Exception):
