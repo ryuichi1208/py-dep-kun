@@ -18,8 +18,8 @@ RUN apk --update-cache --no-cache \
     make \
     gfortran \
     openblas-dev \
-    bash bash-completion \
-    && python -m venv py-dep-kun \
-    && . py-dep-kun/bin/activate \
-    && pip install --upgrade pip \
+    bash bash-completion
+    # && python -m venv py-dep-kun \
+    # && . py-dep-kun/bin/activate \
+RUN pip install --upgrade pip \
     && pip install -r requirements.txt

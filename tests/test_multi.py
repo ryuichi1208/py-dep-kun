@@ -105,7 +105,7 @@ def test_fixture_do_nothing(pre_send_icmp):
 
 def test_hq():
     hq = req.HeapQueControl([1, 2, 3])
-    assert hq.heap_que_push(4) == None
+    assert hq.heap_que_push(4) is None
     assert hq.heap_que_pop() == 1
     assert hq.heap_que_pop() == 2
     assert hq.heap_que_pop() == 3
