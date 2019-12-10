@@ -111,7 +111,7 @@ def test_hq():
     assert hq.heap_que_pop() == 3
     assert hq.heap_que_pop() == 4
 
-    assert hq.switch_insert("test_ans") == False
-    assert hq.switch_insert("proc_start") == True
-    assert hq.switch_insert("proc_end") == True
-    assert hq.switch_insert("proc_wait") == True
+    assert hq.switch_insert("test_ans") is False
+    assert hq.switch_insert("proc_start") is True
+    assert hq.switch_insert("proc_end") is True
+    assert hq.switch_insert("proc_wait") is True
