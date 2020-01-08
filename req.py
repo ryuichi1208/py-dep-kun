@@ -10,6 +10,7 @@ import aiohttp
 import concurrent.futures
 import math
 import pickle
+import heapq
 
 # from Crypto.Cipher import AES
 
@@ -138,3 +139,22 @@ class DefPrintMethod(object):
             return 0
         except Exception:
             return 1
+
+
+class HeapQueControl(object):
+    def __init__(self, al: list):
+        self.al = al
+        heapq.heapify(self.al)
+
+    def heap_que_pop(self):
+        return heapq.heappop(self.al)
+
+    def heap_que_push(self, ins: int):
+        return heapq.heappush(self.al, ins)
+
+    def switch_insert(self, st: str):
+        return (
+            True
+            if st in ["proc_start", "proc_end", "proc_wait", "proc_unwait"]
+            else False
+        )

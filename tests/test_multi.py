@@ -6,6 +6,7 @@ import sys
 sys.path.append(".")
 
 import run
+import req
 import time
 import re
 import pytest
@@ -101,3 +102,16 @@ def pre_send_icmp():
 
 def test_fixture_do_nothing(pre_send_icmp):
     pass
+
+def test_hq():
+    hq = req.HeapQueControl([1, 2, 3])
+    assert hq.heap_que_push(4) is None
+    assert hq.heap_que_pop() == 1
+    assert hq.heap_que_pop() == 2
+    assert hq.heap_que_pop() == 3
+    assert hq.heap_que_pop() == 4
+
+    assert hq.switch_insert("test_ans") is False
+    assert hq.switch_insert("proc_start") is True
+    assert hq.switch_insert("proc_end") is True
+    assert hq.switch_insert("proc_wait") is True
