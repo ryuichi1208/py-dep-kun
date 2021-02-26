@@ -1,6 +1,6 @@
 cython==0.29.14
 PyYAML==5.1.2
-aiohttp==3.6.1
+aiohttp==3.7.4
 black==19.3b0
 codecov==2.0.15
 logger==1.4
