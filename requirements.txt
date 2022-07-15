@@ -2,7 +2,7 @@ cython==0.29.14
 PyYAML==5.1.2
 aiohttp==3.6.1
 black==19.3b0
-codecov==2.0.15
+codecov==2.0.16
 logger==1.4
 mypy-extensions==0.4.1
 mypy==0.720
