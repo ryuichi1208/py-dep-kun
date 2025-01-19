@@ -42,10 +42,20 @@ html = """
 async def get():
     return HTMLResponse(html)
 
-
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    # クライアントの接続を受け入れる
+    print("aaa:: test")
     await websocket.accept()
-    while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Message text was: {data}")
+    try:
+        while True:
+            data = await websocket.receive_text()
+            print(f"Received message: {data}")  # ログに受信メッセージを記録
+            await websocket.send_text(f"Message text was: {data}")
+    except WebSocketDisconnect:
+        print("Client disconnected.")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+    finally:
+        await websocket.close(code=1000)
+        print("WebSocket connection closed.")
