@@ -19,3 +19,4 @@ index.html
 *.rej
 *.swp
 *.c
+__pycache__
