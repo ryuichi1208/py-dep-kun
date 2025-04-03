@@ -16,5 +16,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: websocket_backend
+    volumes:
+      - ./backend:/app
     expose:
       - "8000"

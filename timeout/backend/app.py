@@ -56,7 +56,12 @@ async def websocket_endpoint(websocket: WebSocket):
                 data = await websocket.receive_text()
                 print(f"Received: {data}")
                 print("Processing...")
-                time.sleep(3)
+                print("Sleeping for 2 seconds...")
+                time.sleep(2)
+                print("Sleeping for 2 seconds...")
+                time.sleep(2)
+                print("Sleeping for 2 seconds...")
+                time.sleep(2)
                 # 応答を送信
                 await websocket.send_text(f"Processed after sleep: {data}")
             except WebSocketDisconnect:
